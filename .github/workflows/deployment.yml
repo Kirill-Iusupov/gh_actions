@@ -1,7 +1,7 @@
 name: Deploy React App
 on: push
 jobs:
-  test_my_app:
+  test:
     runs-on: ubuntu-22.04
     steps:
       - name: Get the repository code
@@ -12,6 +12,7 @@ jobs:
         run: npm run test
   lint:
     runs-on: ubuntu-22.04
+    needs: test
     steps:
       - name: Get the repository code
         uses: actions/checkout@v7
@@ -21,6 +22,7 @@ jobs:
         run: npm run lint
   build:
     runs-on: ubuntu-22.04
+    needs: lint
     steps:
       - name: Get the repository code
         uses: actions/checkout@v7
